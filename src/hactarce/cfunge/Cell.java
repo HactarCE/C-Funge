@@ -8,10 +8,10 @@ class Cell {
 	static final Map<Integer, Character> customEncoding = new HashMap<Integer, Character>() {{
 		put(0x02, '‘');
 		put(0x03, '’');
-		put(0x07, '♪');
-		put(0x09, '↔');
+//		put(0x07, '♪');
+//		put(0x09, '↔');
 		put(0x0A, '¶');
-		put(0x0B, '↕');
+//		put(0x0B, '↕');
 		put(0x11, '▲');
 		put(0x12, '▼');
 		put(0x13, '►');

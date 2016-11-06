@@ -69,15 +69,6 @@ class CFungeIP {
 					stack.pushString(stringBuilder.reverse().toString());
 					stringBuilder = null;
 					break; //endregion
-				case 0x07: //region BEEP
-					Toolkit.getDefaultToolkit().beep();
-					break; //endregion
-				case 0x09: //region STOP VERT (stop vertical movement)
-					pos = pos.setY(0);
-					break; //endregion
-				case 0x0B: //region STOP HORIZ (stop horizontal movement)
-					pos = pos.setX(0);
-					break; //endregion
 				case 0x18: //region NORTH
 					delta = Vector.NORTH;
 					break; //endregion

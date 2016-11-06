@@ -1,3 +1,5 @@
+#### This README is incomplete, and will be consistently updated. Not all implemented features are listed here, and not all features here are implemented.
+
 # C-Funge
 
 C-Funge is a Fungeiod, inspired by Befunge. Befunge-93, the first public version of Befunge, is lacking in features and restricted to a small 80x25 "world," making it impractical for larger programs. To the contrary, Befunge-98 is bloated with instructions that are vaguely documented and difficult to use, let alone impelment. C-Funge aims to be a compromise between the two, with a plethora of instructions practical for general use and code golfing alike.
@@ -27,9 +29,9 @@ All of these symbols have been chosen to display properly in Windows Command Pro
 Here are a few examples to get a feel for the language:
 
 #### Hello, world!
-	`"Hello, world!’W,q`
+	"Hello, world!’W,q
 
-- `’` - Begin quoting a string.
+- `"` - Begin quoting a string.
 - `Hello, world!` - Push the letters of `Hello, world!` onto the string buffer, with `H` at the bottom and `!` at the top.
 - `’` - Push the buffer onto the stack in reverse order (causing 'H' to be at the top).
 - `W` - While the top of the stack is not zero...
@@ -250,7 +252,6 @@ The main stack in C-Funge (usually just referred to as "the stack") is where all
 - `>` - GREATER THAN (Pop two values `b` and `a` off the stack; push `1` if `a > b`, otherwise push `0`)
 - `A` - ABSOLUTE VALUE (Pop a value `n` off the stack; push `|n|`)
 - `D` - DECREMENT
-- `+` - ADD (Pop two values `b` and `a` off the stack; push `a + b`)
 
 ### STRINGS AND I/O
 

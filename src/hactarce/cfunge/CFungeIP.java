@@ -150,7 +150,10 @@ class CFungeIP {
 					stack.push(stack.pop() < b);
 					break; //endregion
 				case '=': //region IF
-					if (!Cell.b(stack.pop())) moveForward();
+					moveForward();
+					if (world.get(pos) != '{' ^ Cell.b(stack.pop())) {
+						moveBackward();
+					}
 					break; //endregion
 				case '>': //region GREATER THAN
 					b = stack.pop();
@@ -198,7 +201,7 @@ class CFungeIP {
 				case 'F': //region [RESERVED]
 					break; //endregion
 				case 'G': //region GET FROM STACK
-					stack.push(stack.pop(stack.pop()));
+					stack.push(stack.peek(stack.pop()));
 					break; //endregion
 				case 'H': //region [RESERVED]
 					break; //endregion
@@ -302,7 +305,11 @@ class CFungeIP {
 					break; //endregion
 				case '^': //region EXPONENTIATE
 					b = stack.pop();
-					stack.push(stack.pop() ^ b);
+					a = stack.pop();
+					for (int i = 0; i < b; i++) {
+						a *= a;
+					}
+					stack.push(a);
 					break; //endregion
 				case '_': //region [RESERVED]
 					break; //endregion

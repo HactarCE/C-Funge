@@ -3,7 +3,7 @@ package hactarce.cfunge;
 import java.util.HashMap;
 import java.util.Map;
 
-class FungeCell {
+class Cell {
 
 	static final Map<Integer, Character> customEncoding = new HashMap<Integer, Character>() {{
 		put(0x02, '‘');
@@ -22,13 +22,21 @@ class FungeCell {
 		put(0x1B, '←');
 	}};
 
-	private FungeCell() {
+	private Cell() {
 	}
 
-	static char getChar(int value) {
+	static char c(int value) {
 		if (customEncoding.containsKey(value)) {
 			return customEncoding.get(value);
 		} else return (char) value;
+	}
+
+	static boolean b(int value) {
+		return value != 0;
+	}
+
+	static int v(boolean truish) {
+		return truish ? 1 : 0;
 	}
 
 }

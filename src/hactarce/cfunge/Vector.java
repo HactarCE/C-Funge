@@ -46,6 +46,14 @@ class Vector {
 		return new Vector(x * scalar, y * scalar);
 	}
 
+	Vector rotateRight() {
+		return new Vector(-y, x);
+	}
+
+	Vector rotateLeft() {
+		return new Vector(y, -x);
+	}
+
 	Vector setX(int x) {
 		return new Vector(x, y);
 	}

@@ -285,6 +285,7 @@ class CFungeIP {
 							delta = oldDelta;
 							origin = oldOrigin;
 						}
+						return;
 					}
 					break; //endregion
 				case 'X': //region GET IP DELTA
@@ -359,7 +360,7 @@ class CFungeIP {
 									delta = oldDelta;
 									origin = oldOrigin;
 								} else callStack.pop();
-							}));
+							}, false));
 						} else {
 							stepForward();
 							pos = oldPos;
@@ -367,6 +368,7 @@ class CFungeIP {
 							origin = oldOrigin;
 							stack.push(b + 1);
 						}
+						return;
 					}
 					break; //endregion
 				case 'l': //region [RESERVED]
@@ -420,7 +422,10 @@ class CFungeIP {
 					ignoreMode();
 					break; //endregion
 				case '}': //region END IGNORE/END BLOCK
-					callStack.peek().onWeakReturn();
+					if (callStack.size() > 0 && callStack.peek().onWeakReturn != null) {
+						callStack.pop().onWeakReturn();
+						return;
+					}
 					break; //endregion
 				case '~': //region INPUT LINE (TODO: NYI)
 					break; //endregion
@@ -429,6 +434,9 @@ class CFungeIP {
 		}
 		if (delta.equals(Vector.ORIGIN)) throw new StopException();
 		moveForward();
+		if (callStack.size() > 0 && callStack.peek().instantWeakReturn) {
+			callStack.pop().onWeakReturn();
+		}
 	}
 
 	private void ignoreMode() {
@@ -449,14 +457,16 @@ class CFungeIP {
 	private class Callback {
 		private Runnable onReturn = null;
 		private Runnable onWeakReturn = null;
+		private boolean instantWeakReturn = false;
 
 		Callback(Runnable onReturn) {
 			this.onReturn = onReturn;
 		}
 
-		Callback(Runnable onReturn, Runnable onWeakReturn) {
+		Callback(Runnable onReturn, Runnable onWeakReturn, boolean instantWeakReturn) {
 			this.onReturn = onReturn;
 			this.onWeakReturn = onWeakReturn;
+			this.instantWeakReturn = instantWeakReturn;
 		}
 
 		void onReturn() {
